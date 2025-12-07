@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: artifactory-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/<your-username>/infra-artifactory.git'
+    targetRevision: main
+    path: .
+    helm:
+      chart: artifactory-oss
+      repo: https://charts.jfrog.io
+      releaseName: artifactory-dev
+      valueFiles:
+        - values/values-dev.yaml
+
+  destination:
+    server: https://kubernetes.default.svc   
+    namespace: artifactory
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
