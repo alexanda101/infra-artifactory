@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://charts.jfrog.io
     chart: artifactory-oss
-    targetRevision: 107.67.15        # <-- chart version
+    targetRevision: 107.125.8        # <-- chart version
     helm:
       releaseName: artifactory-dev
       valueFiles:
