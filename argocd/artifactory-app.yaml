@@ -12,8 +12,20 @@ spec:
     targetRevision: 107.125.8        # <-- chart version
     helm:
       releaseName: artifactory-dev
-      valueFiles:
-        - values/values-dev.yaml     # relative to repo root
+      values: |
+        artifactory:
+          persistence:
+            enabled: true
+            size: 5Gi
+
+        ingress:
+          enabled: false
+
+        postgresql:
+          enabled: true
+          primary:
+            persistence:
+              size: 5Gi
 
   destination:
     server: https://kubernetes.default.svc
