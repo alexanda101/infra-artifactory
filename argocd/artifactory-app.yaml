@@ -5,19 +5,18 @@ metadata:
   namespace: argocd
 spec:
   project: default
+
   source:
-    repoURL: 'https://github.com/<your-username>/infra-artifactory.git'
-    targetRevision: main
-    path: .
+    repoURL: https://charts.jfrog.io
+    chart: artifactory-oss
+    targetRevision: 107.67.15        # <-- chart version
     helm:
-      chart: artifactory-oss
-      repo: https://charts.jfrog.io
       releaseName: artifactory-dev
       valueFiles:
-        - values/values-dev.yaml
+        - values/values-dev.yaml     # relative to repo root
 
   destination:
-    server: https://kubernetes.default.svc   
+    server: https://kubernetes.default.svc
     namespace: artifactory
 
   syncPolicy:
